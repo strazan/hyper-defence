@@ -1,0 +1,17 @@
+{
+  "name": "tower-defence",
+  "version": "1.0.0",
+  "description": "Best tower defence ever made",
+  "main": "main.js",
+  "scripts": {
+    "start": "nodemon server/main.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.4"
+  }
+}
