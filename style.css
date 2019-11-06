@@ -2,10 +2,3 @@ body {
 	margin: 0;
 	box-sizing: border-box;
 }
-
-#map {
-	display: grid;
-	grid-template-columns: repeat(8, 1fr);
-	grid-template-rows: repeat(8, 1fr);
-	height: 100vh;
-}

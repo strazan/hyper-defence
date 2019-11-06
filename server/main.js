@@ -68,48 +68,46 @@ app.get('/game', (req, res) => res.send({
 
 function enemyMove(e) {
     e.counter++
+
     let pos;
     if (e.counter < e.path.length - 1) {
         pos = e.path[e.counter]
     } else {
         pos = e.path[e.path.length - 1]
     }
-
-
     if (e.counter === e.path.length - 1) {
         map[pos.y][pos.x] = 0
         clearInterval(enemyMove)
     }
-
-    if (e.counter !== 0) {
+   
+    if (e.counter !== 0 && e.counter <= e.path.length ) {
         let pPos = e.path[e.counter - 1]
         map[pPos.y][pPos.x] = 0
     }
-    map[pos.y][pos.x] = 2
-
-
+    if(e.counter === e.path.length ) {
+        map[pos.y][pos.x] = 0
+        enemies.slice(enemies.indexOf(e),enemies.indexOf(e)+1 );
+        console.log(enemies.indexOf(e))
+    } else {
+        map[pos.y][pos.x] = 2
+    } 
+   
 }
 
-// let spawnEnemy = 
-// setInterval(() => {
 for (let i = 0; i < 100; i++) {
     enemies.push({
         path: path,
         counter: 0
     });
 }
-let c = 0
+
+let index = 0
 setInterval(() => {
-    let e = enemies[c]
+    let enemy = enemies[index]
     setInterval(() => {
-        enemyMove(e)
+        enemyMove(enemy)
     }, 500);
-    c++
+    index++
 }, 2000);
-
-
-//     setInterval(enemtMove, 1000, e);
-
-// }, 3000);
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))

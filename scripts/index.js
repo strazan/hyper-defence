@@ -39,10 +39,10 @@ setInterval(() => {
             // console.log(response)
             return response.json();
         })
-        .then(function (myJson) {
-            makePath(myJson.map)
+        .then(function (o) {
+            makePath(o.map)
         });
-}, 200);
+}, 100);
 
 
 function makePath(map) {
