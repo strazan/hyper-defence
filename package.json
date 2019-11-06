@@ -2,7 +2,7 @@
   "name": "tower-defence",
   "version": "1.0.0",
   "description": "Best tower defence ever made",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
     "build": "NODE_ENV=production webpack --config webpack.config.js",
     "start": "webpack-dev-server --open",

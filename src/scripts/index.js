@@ -1,35 +1,17 @@
+import './../style.css';
 const canvas = document.getElementById('canvas');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 const context = canvas.getContext('2d');
-const tileSize = Math.floor(window.innerWidth / 16);
+const tileWidth = Math.floor(window.innerWidth / 16);
+const tileHeight = Math.floor(window.innerHeight / 16);
 const main = require('./map')
 
 console.log(main.getMap())
 setInterval(() => {
   makePath(main.getMap())
-}, 50);
+}, 27);
 
-// Convert into array matrix
-
-// const map = mapString
-//     .split('\n')
-//     .filter(row => row)
-//     .map(row => {
-//         return row
-//             .split('')
-//             .map(col => col === 'x' ? 1 : 0);
-//     });
-// setInterval(() => {
-//   fetch('http://localhost:3000/game/')
-//     .then(function(response) {
-//       // console.log(response)
-//       return response.json();
-//     })
-//     .then(function(o) {
-//       makePath(o.map);
-//     });
-// }, 100);
 
 function makePath(map) {
   context.clearRect(0, 0, canvas.width, canvas.height);
@@ -47,7 +29,7 @@ function makePath(map) {
           context.fillStyle = 'salmon';
           break;
       }
-      context.fillRect(x * tileSize, y * tileSize, tileSize, tileSize);
+      context.fillRect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
     });
 
   });
