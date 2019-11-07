@@ -14,6 +14,7 @@ class Enemy {
         this.health = 2;
         this.speed = 1;
         this.ts = ts;
+        this.image = sk.loadImage('../media/images/rainbow.jpg')
 
     }
 
@@ -21,7 +22,7 @@ class Enemy {
         //   console.log(sk)
         this.sk.fill(150, 150, 150);
         // sk.fill(this.getColor());
-        this.e = this.sk.ellipse(this.pos.x, this.pos.y, this.radius * this.ts, this.radius * this.ts);
+        this.e = this.sk.image(this.image, this.pos.x, this.pos.y, this.radius * this.ts, this.radius * this.ts);
     }
 
     steer() {
