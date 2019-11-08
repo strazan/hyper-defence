@@ -1,116 +1,168 @@
+/*
+------ TODO -------
+In no order.
+
+#1 Change animation library to TWEEN
+
+#2 Fix the bullet animation
+    - tween.
+    - maybe have travel duration as a property in turret
+
+#3 Fix the levels.js file, make it look nice/ easy to change the variables.
+
+#4 Invent more enemies, maybe change the structure of how different are created
+
+#5 Invent more turrets. 
+
+#6 Make shop
+
+# Make turrets placable on map.
+
+*/
 import './../style.css'
 import {
-    Enemy
-} from './enemy'
+    Turret
+} from './turret'
 
+const _levels = require('./levels')
 const _map = require('./map')
-const path = _map.getAstarPath()
-console.log(_map.getAstarPath())
+
 const tile_WALL = _map.getMap().tile
-const tileWidth = Math.floor(window.innerHeight / 16)
-const tileHeight = Math.floor(window.innerHeight / 16)
 const ts = Math.floor(window.innerHeight / 16)
+
+const canvas = document.getElementById('canvas');
+const context = canvas.getContext('2d');
+canvas.width = window.innerHeight;
+canvas.height = window.innerHeight;
+
+let cash = 100;
+const domCash = document.getElementById('cash')
+const btnPlay = document.getElementById('start')
+
+domCash.innerHTML = cash;
+
+btnPlay.addEventListener('click', startLevel)
 
 let state = {
     map: _map.getMap().maze,
     enemies: [],
-    turrets: [{
-        position: {
-            x: 2,
-            y: 4,
-        },
-        shootTimer: 0,
-    }, {
-        position: {
-            x: 2,
-            y: 6,
-        },
-        shootTimer: 0,
-    }],
-    spawnTimer: 0,
+    turrets: [new Turret(2, 4)],
+    toSpawn: [],
     clock: 0,
+    level: 0,
 };
+
+function startLevel() {
+
+    state.level++
+    let nextLvl = '';
+    switch (state.level) {
+        case 1:
+            nextLvl = 'one'
+            break;
+        case 2:
+            nextLvl = 'two'
+            break
+    }
+
+    state.toSpawn = _levels.getLevels()[nextLvl].enemies
+    btnPlay.disabled = true;
+}
 
 function getState(oldState) {
     const state = {
         ...oldState
     };
 
-    if (state.spawnTimer > 2000) {
-        state.enemies.push(
-            new Enemy(1, 1, path)
-
-        );
-        state.spawnTimer = 0;
-    } else {
-        state.spawnTimer += window.performance.now() - state.clock;
-    }
+    state.toSpawn.forEach(e => {
+        if (e.spawnTimer > e.spawnFrequency) {
+            if (e.toSpawn.length > 0) {
+                state.enemies.push(
+                    e.toSpawn.pop()
+                );
+                e.spawnTimer = 0;
+            }
+        } else {
+            e.spawnTimer += window.performance.now() - state.clock;
+        }
+    })
 
     for (let i = 0; i < state.enemies.length; i++) {
         const enemy = state.enemies[i];
-        if (enemy.moveTimer > 500) {
+
+        if (enemy.moveTimer > enemy.speed) {
             enemy.step++
             if (enemy.step < enemy.path.length - 1) {
-                // enemy.position.x += 1;
                 let dx = enemy.path[enemy.step].x - enemy.position.x
                 let dy = enemy.path[enemy.step].y - enemy.position.y
+
+                /* --------------------------------------------------------------------- #1 */
                 anime({
                     targets: enemy.position,
                     x: enemy.position.x + dx,
                     y: enemy.position.y + dy,
-                    duration: 499,
+                    duration: enemy.speed - 1,
                     easing: 'linear',
                 });
 
                 enemy.moveTimer = 0;
             } else {
                 enemy.isAlive = false;
+
             }
         } else {
             enemy.moveTimer += window.performance.now() - state.clock;
         }
     }
 
+    state.enemies = state.enemies.filter(e => e.isAlive)
+
     for (let i = 0; i < state.turrets.length; i++) {
         const turret = state.turrets[i];
 
-        if (!turret.target) {
+        if (!turret.target && state.enemies.length > 0) {
             turret.target = state.enemies[0];
         }
+        if (turret.target && !turret.target.isAlive) {
+            turret.target = null
+        }
 
-        if (turret.shootTimer > 500 && turret.target) {
-            turret.target.health -= 10;
+        if (turret.shootTimer > turret.speed && turret.target) {
+            turret.target.health -= turret.damage;
+            turret.target.isHit = true;
+            turret.fired = true
+
+            /* --------------------------------------------------------------------- #1 */
+            /* --------------------------------------------------------------------- #2 */
+            setTimeout(() => {
+                turret.fired = false
+                turret.bullet.position = {
+                    ...turret.position
+                }
+            }, 300)
+
             if (turret.target.health <= 0) {
-                // state.enemies.shift();
+                turret.target.isAlive = false;
 
-                state.enemies[(state.enemies.indexOf(turret.target))].isAlive = false;
-               
+                cash += turret.target.cash
+                domCash.innerHTML = cash
+                turret.target = null
             }
             turret.shootTimer = 0;
         } else {
             turret.shootTimer += window.performance.now() - state.clock;
         }
     }
+
     state.enemies = state.enemies.filter(e => e.isAlive)
+    if (!state.enemies.length) {
+
+        btnPlay.disabled = false
+    }
     state.clock = window.performance.now();
 
     return state;
 }
-
-const canvas = document.getElementById('canvas');
-canvas.width = window.innerHeight;
-canvas.height = window.innerHeight;
-const context = canvas.getContext('2d');
-
-canvas.onclick = e => {
-    state.turrets.push({
-        position: {
-            x: 2,
-            y: 10,
-        },
-        shootTimer: 0,
-    });
-};
 
 function render() {
     const oldState = state;
@@ -140,22 +192,28 @@ function render() {
 
     for (let i = 0; i < state.enemies.length; i++) {
         const enemy = state.enemies[i];
-        let image = new Image(ts, ts)
-        image.src = '../media/images/enemies/student-blue.svg'
-        // context.fillStyle = 'rgba(255, 0, 0, ' + enemy.health / 100 + ')';
-        context.drawImage(image, enemy.position.x * ts, enemy.position.y * ts, ts, ts);
-        // context.fillRect(enemy.position.x * ts, enemy.position.y * ts, ts, ts);
+        context.drawImage(enemy.image, enemy.position.x * ts, enemy.position.y * ts, ts, ts);
     }
 
-    context.fillStyle = '#fff';
+
     for (let i = 0; i < state.turrets.length; i++) {
         const turret = state.turrets[i];
+        context.drawImage(turret.image, turret.position.x * ts + 3, turret.position.y * ts + 3, ts * 0.9, ts * 0.9);
 
-        if (turret.shootTimer > 500) {
 
+        /* --------------------------------------------------------------------- #2 */
+        if (turret.fired) {
+            context.drawImage(turret.bullet, turret.bullet.position.x * ts, turret.bullet.position.y * ts, ts * 0.5, ts * 0.5);
+            if (turret.target) {
+                anime({
+                    targets: turret.bullet.position,
+                    x: turret.target.position.x,
+                    y: turret.target.position.y,
+                    duration: 200,
+                    easing: 'linear',
+                });
+            }
         }
-
-        context.fillRect(turret.position.x * ts, turret.position.y * ts, ts, ts);
     }
 
     window.requestAnimationFrame(render);
