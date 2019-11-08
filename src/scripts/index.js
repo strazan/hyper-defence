@@ -1,68 +1,164 @@
 import './../style.css'
 import {
-  Enemy
+    Enemy
 } from './enemy'
-import * as p5 from './../scripts/p5.min'
 
-
+const _map = require('./map')
+const path = _map.getAstarPath()
+console.log(_map.getAstarPath())
+const tile_WALL = _map.getMap().tile
 const tileWidth = Math.floor(window.innerHeight / 16)
 const tileHeight = Math.floor(window.innerHeight / 16)
 const ts = Math.floor(window.innerHeight / 16)
-const _map = require('./map')
 
-let map = _map.getMap().maze
-let path = _map.getMap().path
-let sketch;
-let spawn = _map.getMap().spawn
-let e;
+let state = {
+    map: _map.getMap().maze,
+    enemies: [],
+    turrets: [{
+        position: {
+            x: 2,
+            y: 4,
+        },
+        shootTimer: 0,
+    }, {
+        position: {
+            x: 2,
+            y: 6,
+        },
+        shootTimer: 0,
+    }],
+    spawnTimer: 0,
+    clock: 0,
+};
 
+function getState(oldState) {
+    const state = {
+        ...oldState
+    };
 
-let enemies = []
-let s = (sk) => {
-  sk.setup = () => {
-    sk.stroke(255)
-    sketch = sk;
-    var div = document.getElementById('canvas-holder')
-    let canvas = sk.createCanvas(window.innerHeight, window.innerHeight)
-    canvas.parent(div)
-    drawMap(map, sk)
-    setInterval(() => {
-      enemies.push(new Enemy(ts * spawn.x, spawn.y * ts, path, ts, sk))
-    }, 2000);
-  }
+    if (state.spawnTimer > 2000) {
+        state.enemies.push(
+            new Enemy(1, 1, path)
 
-  sk.draw = () => {
-    drawMap(map, sk)
-    enemies.forEach(e => {
-      e.steer()
-      e.move()
-    })
+        );
+        state.spawnTimer = 0;
+    } else {
+        state.spawnTimer += window.performance.now() - state.clock;
+    }
 
+    for (let i = 0; i < state.enemies.length; i++) {
+        const enemy = state.enemies[i];
+        if (enemy.moveTimer > 500) {
+            enemy.step++
+            if (enemy.step < enemy.path.length - 1) {
+                // enemy.position.x += 1;
+                let dx = enemy.path[enemy.step].x - enemy.position.x
+                let dy = enemy.path[enemy.step].y - enemy.position.y
+                anime({
+                    targets: enemy.position,
+                    x: enemy.position.x + dx,
+                    y: enemy.position.y + dy,
+                    duration: 499,
+                    easing: 'linear',
+                });
 
-  }
+                enemy.moveTimer = 0;
+            } else {
+                enemy.isAlive = false;
+            }
+        } else {
+            enemy.moveTimer += window.performance.now() - state.clock;
+        }
+    }
+
+    for (let i = 0; i < state.turrets.length; i++) {
+        const turret = state.turrets[i];
+
+        if (!turret.target) {
+            turret.target = state.enemies[0];
+        }
+
+        if (turret.shootTimer > 500 && turret.target) {
+            turret.target.health -= 10;
+            if (turret.target.health <= 0) {
+                // state.enemies.shift();
+
+                state.enemies[(state.enemies.indexOf(turret.target))].isAlive = false;
+               
+            }
+            turret.shootTimer = 0;
+        } else {
+            turret.shootTimer += window.performance.now() - state.clock;
+        }
+    }
+    state.enemies = state.enemies.filter(e => e.isAlive)
+    state.clock = window.performance.now();
+
+    return state;
 }
 
-function drawMap(map, sk) {
-  map.forEach((row, y) => {
-    row.forEach((tile, x) => {
-      switch (tile) {
-        case 0:
-          sk.fill(255);
-          break;
-        case 1:
-          sk.fill(0);
-          break;
-        case 2:
-          sk.fill(100);
-          break;
-      }
-      sk.rect(x * tileWidth, y * tileHeight, tileWidth, tileHeight);
+const canvas = document.getElementById('canvas');
+canvas.width = window.innerHeight;
+canvas.height = window.innerHeight;
+const context = canvas.getContext('2d');
+
+canvas.onclick = e => {
+    state.turrets.push({
+        position: {
+            x: 2,
+            y: 10,
+        },
+        shootTimer: 0,
     });
-  });
+};
+
+function render() {
+    const oldState = state;
+    state = getState(state);
+
+    context.clearRect(0, 0, canvas.width, canvas.height);
+
+    state.map.forEach((row, y) => {
+        row.forEach((tile, x) => {
+            switch (tile) {
+                case 0:
+                    context.fillStyle = 'rgba(0,0,0,0)'
+                    context.fillRect(x * ts, y * ts, ts, ts);
+                    break;
+                case 1:
+
+                    context.drawImage(tile_WALL, x * ts, y * ts, ts, ts);
+                    break;
+                case 2:
+                    context.fillStyle = 'salmon'
+                    context.fillRect(x * ts, y * ts, ts, ts);
+                    break;
+            }
+
+        })
+    });
+
+    for (let i = 0; i < state.enemies.length; i++) {
+        const enemy = state.enemies[i];
+        let image = new Image(ts, ts)
+        image.src = '../media/images/enemies/student-blue.svg'
+        // context.fillStyle = 'rgba(255, 0, 0, ' + enemy.health / 100 + ')';
+        context.drawImage(image, enemy.position.x * ts, enemy.position.y * ts, ts, ts);
+        // context.fillRect(enemy.position.x * ts, enemy.position.y * ts, ts, ts);
+    }
+
+    context.fillStyle = '#fff';
+    for (let i = 0; i < state.turrets.length; i++) {
+        const turret = state.turrets[i];
+
+        if (turret.shootTimer > 500) {
+
+        }
+
+        context.fillRect(turret.position.x * ts, turret.position.y * ts, ts, ts);
+    }
+
+    window.requestAnimationFrame(render);
 }
 
-function p5draw(sk) {
-
-}
-
-const P5 = new p5(s);
+render();

@@ -29,15 +29,6 @@ map.maze = mapString
     return row.split('').map(col => (col === 'x' ? 1 : 0));
   });
 
-map.path = astar.getPath(
-  map.maze, {
-    x: 1,
-    y: 1
-  }, {
-    x: 14,
-    y: 14,
-  }
-);
 map.spawn = {
   x: 1,
   y: 1,
@@ -48,10 +39,31 @@ map.end = {
   y: 14,
 }
 
+map.path = astar.getPath(
+  map.maze, map.spawn, map.end
+);
+
+const tile = new Image(100,100)
+tile.src = ('../media/images/map/tile-purple.svg')
+
+map.tile = tile
+
+
 function getMap() {
   return map;
 }
 
+function getAstarPath() {
+  return map.path.map(o => {
+    return {
+      x: o.x,
+      y: o.y
+    }
+  })
+}
+
 module.exports = {
-  getMap: getMap
+  getMap: getMap,
+  getAstarPath: getAstarPath
+
 };
