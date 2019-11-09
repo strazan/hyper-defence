@@ -16,7 +16,9 @@ In no order.
 
 #6 Make shop
 
-# Make turrets placable on map.
+#7 Make turrets placable on map.
+
+#8 Make turrets target first in map not first in array, also switch target if any enemy passes.
 
 */
 import './../style.css'
@@ -46,7 +48,7 @@ btnPlay.addEventListener('click', startLevel)
 let state = {
     map: _map.getMap().maze,
     enemies: [],
-    turrets: [new Turret(2, 4)],
+    turrets: [new Turret(10, 6)],
     toSpawn: [],
     clock: 0,
     level: 0,
@@ -120,6 +122,7 @@ function getState(oldState) {
     for (let i = 0; i < state.turrets.length; i++) {
         const turret = state.turrets[i];
 
+        /* --------------------------------------------------------------------- #8 */
         if (!turret.target && state.enemies.length > 0) {
             turret.target = state.enemies[0];
         }
