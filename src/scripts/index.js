@@ -1,4 +1,5 @@
 import './../style.css'
+import './../style-modal.css'
 import {
     Enemy
 } from './enemy'
