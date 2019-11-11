@@ -4,5 +4,26 @@
 
 body {
   margin: 0;
-  background-image: url('/media/images/map/background.svg');
+  background: linear-gradient(90deg,#68007e,#25003e);
+  /* -image: url('/media/images/map/background.svg'); */
+  display: flex;
+  align-items: center;
+}
+
+button {
+  width: 100px;
+  height: 100px;
+  margin: auto;
+}
+
+h1 {
+  color: #fff;
+  font-weight: 100;
+}
+
+.store {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }

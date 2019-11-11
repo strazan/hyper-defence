@@ -11,8 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1",
-    "p5": "^0.10.2"
+    "@tweenjs/tween.js": "^18.4.2"
   },
   "devDependencies": {
     "@babel/core": "^7.6.0",
