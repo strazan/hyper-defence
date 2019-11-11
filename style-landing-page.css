@@ -1,0 +1,148 @@
+
+@keyframes scale-up-center {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes slide-bl {
+    0% {
+    transform: translateY(0) translateX(0);
+    }
+    100% {
+    transform: translateY(920px) translateX(-920px);
+    }
+}
+
+@keyframes slide-br {
+    0% {
+    transform: translateY(0) translateX(0);
+    }
+    100% {
+    transform: translateY(1200px) translateX(1000px);
+    }
+}
+/* @keyframes slide-tr {
+    0% {
+    transform: translateY(500px) translateX(0);
+    }
+    100% {
+    transform: translateY(0px) translateX(0px);
+    }
+} */
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        transform: translateY(273px) translateX(0);
+    }
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    /* background-color: #350158; */
+    background-image: linear-gradient(to left, #0e0118, #2d0946);
+    color: #dd9bf7;
+}
+
+#container {
+    display: inline-grid;
+    grid-template-columns: 5% 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 30% 20% 30% 20%;
+}
+
+
+/* #paper-plane-pink {
+    position: absolute;
+    top: -20%;
+    left: 50%;
+    animation-name: slide-bl;
+    animation-delay: 4s;
+    animation-duration: 6s;
+}
+#paper-plane-green {
+    position: absolute;
+    top: -20%;
+    left: 10%;
+    animation-name: slide-br;
+    animation-delay: 5s;
+    animation-duration: 6s;
+} */
+/* #paper-plane-orange {
+    position: absolute;
+    top: 100%;
+    left: 20%;
+    animation-name: slide-tr;
+    animation-delay: 3s;
+    animation-duration: 6s;
+} */
+
+#header {
+    display: inline-grid;
+    grid-column-start: 2;
+    grid-column-end: 7;
+    grid-row-start: 2;
+    align-items: center;
+    font-size: 80px;
+    margin: 0;
+    font-family: dottyshadow;
+}
+
+#info-wrapper {
+    margin: 0;
+    display: inline-grid;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 3;
+    font-family: alien encounters;
+    font-size: 18px;
+}
+
+#play-button {
+    display: inline-grid;
+    align-items: center;
+    justify-items: center;
+    animation-name: scale-up-center;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+}
+
+#read-more-button {
+    display: inlinge-grid;
+    align-items: center;
+    justify-items: center;
+    grid-column-start: 2;
+    font-family: alien encounters;
+
+}
+
+#box {
+    position: absolute;
+    top: 0;
+    left: 75.85%;
+    animation-name: slide-down;
+    animation-duration: 5s;
+    justify-items: left;
+    animation-fill-mode: forwards;
+}
+
+#boxes-img {
+    grid-column-start: 1;
+    grid-column-end: 12;
+    grid-row-start: 3;
+    grid-row-end: 5;
+}
