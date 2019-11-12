@@ -4,7 +4,7 @@
         transform: scale(1);
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.2);
     }
     100% {
         transform: scale(1);
@@ -12,7 +12,7 @@
 }
 
 
-@keyframes slide-bl {
+/* @keyframes slide-bl {
     0% {
     transform: translateY(0) translateX(0);
     }
@@ -28,7 +28,7 @@
     100% {
     transform: translateY(1200px) translateX(1000px);
     }
-}
+} */
 /* @keyframes slide-tr {
     0% {
     transform: translateY(500px) translateX(0);
@@ -43,7 +43,7 @@
         transform: translateY(0) translateX(0);
     }
     100% {
-        transform: translateY(273px) translateX(0);
+        transform: translateY(27.6vh) translateX(0);
     }
 }
 
@@ -61,8 +61,8 @@ body {
 
 #container {
     display: inline-grid;
-    grid-template-columns: 5% 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 30% 20% 30% 20%;
+    grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
+    grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
 }
 
 
@@ -94,9 +94,9 @@ body {
 #header {
     display: inline-grid;
     grid-column-start: 2;
-    grid-column-end: 7;
-    grid-row-start: 2;
-    align-items: center;
+    grid-column-end: 12;
+    grid-row-start: 3;
+    /* align-items: center; */
     font-size: 80px;
     margin: 0;
     font-family: dottyshadow;
@@ -106,10 +106,11 @@ body {
     margin: 0;
     display: inline-grid;
     grid-column-start: 2;
-    grid-column-end: 6;
-    grid-row-start: 3;
+    grid-column-end: 12;
+    grid-row-start: 4;
     font-family: alien encounters;
     font-size: 18px;
+    padding-top: 5%;
 }
 
 #play-button {
@@ -119,6 +120,7 @@ body {
     animation-name: scale-up-center;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
+    padding-top: 10%;
 }
 
 #read-more-button {
@@ -126,14 +128,16 @@ body {
     align-items: center;
     justify-items: center;
     grid-column-start: 2;
+    grid-column-end: 4;
     font-family: alien encounters;
+    margin-top: 10%;
 
 }
 
 #box {
     position: absolute;
     top: 0;
-    left: 75.85%;
+    left: 74.7%;
     animation-name: slide-down;
     animation-duration: 5s;
     justify-items: left;
@@ -141,8 +145,7 @@ body {
 }
 
 #boxes-img {
-    grid-column-start: 1;
-    grid-column-end: 12;
-    grid-row-start: 3;
-    grid-row-end: 5;
+    grid-column-start: 6;
+    grid-column-end: 21;
+    grid-row-start: 5;
 }
