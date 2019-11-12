@@ -12,38 +12,12 @@
 }
 
 
-/* @keyframes slide-bl {
-    0% {
-    transform: translateY(0) translateX(0);
-    }
-    100% {
-    transform: translateY(920px) translateX(-920px);
-    }
-}
-
-@keyframes slide-br {
-    0% {
-    transform: translateY(0) translateX(0);
-    }
-    100% {
-    transform: translateY(1200px) translateX(1000px);
-    }
-} */
-/* @keyframes slide-tr {
-    0% {
-    transform: translateY(500px) translateX(0);
-    }
-    100% {
-    transform: translateY(0px) translateX(0px);
-    }
-} */
-
 @keyframes slide-down {
     0% {
         transform: translateY(0) translateX(0);
     }
     100% {
-        transform: translateY(27.6vh) translateX(0);
+        transform: translateY(164%) translateX(0);
     }
 }
 
@@ -54,7 +28,6 @@
 
 body {
     margin: 0;
-    /* background-color: #350158; */
     background-image: linear-gradient(to left, #0e0118, #2d0946);
     color: #dd9bf7;
 }
@@ -65,39 +38,13 @@ body {
     grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
 }
 
-
-/* #paper-plane-pink {
-    position: absolute;
-    top: -20%;
-    left: 50%;
-    animation-name: slide-bl;
-    animation-delay: 4s;
-    animation-duration: 6s;
-}
-#paper-plane-green {
-    position: absolute;
-    top: -20%;
-    left: 10%;
-    animation-name: slide-br;
-    animation-delay: 5s;
-    animation-duration: 6s;
-} */
-/* #paper-plane-orange {
-    position: absolute;
-    top: 100%;
-    left: 20%;
-    animation-name: slide-tr;
-    animation-delay: 3s;
-    animation-duration: 6s;
-} */
-
 #header {
     display: inline-grid;
     grid-column-start: 2;
     grid-column-end: 12;
     grid-row-start: 3;
     /* align-items: center; */
-    font-size: 80px;
+    font-size: 5vw;
     margin: 0;
     font-family: dottyshadow;
 }
@@ -109,7 +56,7 @@ body {
     grid-column-end: 12;
     grid-row-start: 4;
     font-family: alien encounters;
-    font-size: 18px;
+    font-size: 1vw;
     padding-top: 5%;
 }
 
@@ -131,6 +78,7 @@ body {
     grid-column-end: 4;
     font-family: alien encounters;
     margin-top: 10%;
+    font-size: 1vw;
 
 }
 
