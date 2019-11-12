@@ -9,8 +9,8 @@ class Turret {
             },
             this.shootTimer = 0
 
-        this.damage = 2
-        this.speed = 422
+        this.damage = 10
+        this.speed = 2200
         this.fired = false
         this.image = new Image(200, 200)
         this.image.src = '../media/images/turrets/post-it-information.svg'
@@ -19,6 +19,8 @@ class Turret {
             x: x,
                 y: y,
         }
+        this.bullet.target = null
+        this.bullet.travelSpeed = 200;
         this.bullet.src = '../media/images/turrets/marshmallow.svg'
     }
 }

@@ -16,9 +16,13 @@ In no order.
 
 #6 Make shop
 
-#7 Make turrets placable on map.
+// Kinda done #7 Make turrets placable on map.
 
 #8 Make turrets target first in map not first in array, also switch target if any enemy passes.
+
+#9 Make turrets have radius
+
+#10 rename all to either turrets or towers ffs.
 
 */
 import './../style.css'
@@ -28,31 +32,52 @@ import {
 
 const _levels = require('./levels')
 const _map = require('./map')
-
 const tile_WALL = _map.getMap().tile
 const ts = Math.floor(window.innerHeight / 16)
 
 const canvas = document.getElementById('canvas');
+const butTurrBtn = document.getElementById('buy-turret')
 const context = canvas.getContext('2d');
 canvas.width = window.innerHeight;
 canvas.height = window.innerHeight;
 
 let cash = 100;
+let lives = 100
 const domCash = document.getElementById('cash')
+const domLives = document.getElementById('lives')
+
 const btnPlay = document.getElementById('start')
+let buyingTurr = false;
+let mousePos = {}
 
 domCash.innerHTML = cash;
+domLives.innerHTML = lives;
 
 btnPlay.addEventListener('click', startLevel)
+
+butTurrBtn.addEventListener('click', buyNewTurret)
 
 let state = {
     map: _map.getMap().maze,
     enemies: [],
-    turrets: [new Turret(10, 6)],
+    turrets: [],
     toSpawn: [],
     clock: 0,
     level: 0,
 };
+
+function buyNewTurret() {
+    buyingTurr = true
+    window.addEventListener('mousemove', evt => {
+        mousePos = getMousePos(canvas, evt)
+    })
+    canvas.addEventListener('click', () => {
+        if (buyingTurr && canPlaceTower(getTilePos(mousePos))) {
+            placeNewTower(getTilePos(mousePos))
+            buyingTurr = false
+        }
+    })
+}
 
 function startLevel() {
 
@@ -64,11 +89,41 @@ function startLevel() {
             break;
         case 2:
             nextLvl = 'two'
-            break
+            break;
+        case 3:
+            nextLvl = 'three'
+            break;
     }
 
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
     btnPlay.disabled = true;
+}
+
+function canPlaceTower(pos) {
+    return state.map[pos.y][pos.x] === 1 && !(state.turrets.some(t => {
+        t.position.x !== pos.x && t.position.y !== pos.y
+    })) && cash >= 100
+}
+
+function placeNewTower(pos) {
+    state.turrets.push(new Turret(pos.x, pos.y))
+    cash -= 100
+    domCash.innerHTML = cash;
+}
+
+function getMousePos(canvas, evt) {
+    var rect = canvas.getBoundingClientRect();
+    return {
+        x: evt.clientX - rect.left,
+        y: evt.clientY - rect.top
+    };
+}
+
+function getTilePos(mPos) {
+    return {
+        x: Math.floor(mPos.x / ts),
+        y: Math.floor(mPos.y / ts)
+    }
 }
 
 function getState(oldState) {
@@ -109,6 +164,8 @@ function getState(oldState) {
 
                 enemy.moveTimer = 0;
             } else {
+                lives--;
+                domLives.innerHTML = lives;
                 enemy.isAlive = false;
 
             }
@@ -131,26 +188,40 @@ function getState(oldState) {
         }
 
         if (turret.shootTimer > turret.speed && turret.target) {
-            turret.target.health -= turret.damage;
+
             turret.target.isHit = true;
             turret.fired = true
+
+
+            turret.bullet.target = {
+                ...turret.target.position
+            }
+            console.log(turret.bullet.target)
+
 
             /* --------------------------------------------------------------------- #1 */
             /* --------------------------------------------------------------------- #2 */
             setTimeout(() => {
+                turret.target.health -= turret.damage;
                 turret.fired = false
+
+
+                if (turret.target.health <= 0) {
+                    turret.target.isAlive = false;
+
+                    cash += turret.target.cash
+                    domCash.innerHTML = cash
+                    turret.target = null
+                }
+            }, turret.bullet.travelSpeed)
+            setTimeout(() => {
                 turret.bullet.position = {
                     ...turret.position
                 }
-            }, 300)
+                turret.bullet.target = null
+            }, turret.bullet.travelSpeed + 100)
 
-            if (turret.target.health <= 0) {
-                turret.target.isAlive = false;
 
-                cash += turret.target.cash
-                domCash.innerHTML = cash
-                turret.target = null
-            }
             turret.shootTimer = 0;
         } else {
             turret.shootTimer += window.performance.now() - state.clock;
@@ -172,6 +243,7 @@ function render() {
     state = getState(state);
 
     context.clearRect(0, 0, canvas.width, canvas.height);
+
 
     state.map.forEach((row, y) => {
         row.forEach((tile, x) => {
@@ -205,20 +277,24 @@ function render() {
 
 
         /* --------------------------------------------------------------------- #2 */
-        if (turret.fired) {
+        // if (turret.fired) {
+
+        if (turret.bullet.target) {
             context.drawImage(turret.bullet, turret.bullet.position.x * ts, turret.bullet.position.y * ts, ts * 0.5, ts * 0.5);
-            if (turret.target) {
-                anime({
-                    targets: turret.bullet.position,
-                    x: turret.target.position.x,
-                    y: turret.target.position.y,
-                    duration: 200,
-                    easing: 'linear',
-                });
-            }
+            anime({
+                targets: turret.bullet.position,
+                x: turret.bullet.target.x,
+                y: turret.bullet.target.y,
+                duration: turret.bullet.travelSpeed - 130,
+                easing: 'linear',
+            });
         }
     }
-
+    // }
+    if (buyingTurr) {
+        context.fillStyle = "#00000044";
+        context.fillRect(mousePos.x - 200, mousePos.y - 200, 400, 400);
+    }
     window.requestAnimationFrame(render);
 }
 

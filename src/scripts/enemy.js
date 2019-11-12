@@ -30,13 +30,14 @@ class Enemy {
 
     loadFromTemplate(template) {
         switch (template) {
-            case 'bd':
-                this.cash = 11;
+            case 'weak':
+                this.cash = 5;
                 this.image.src = '../media/images/enemies/student-blue.svg'
                 break;
-            case 'fed':
-                this.cash = 24;
+            case 'medium':
+                this.cash = 10;
                 this.speed = 700;
+                this.health = 20;
                 this.image.src = '../media/images/enemies/student-pink.svg'
                 break;
         }
