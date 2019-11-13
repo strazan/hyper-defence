@@ -1,28 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>tower-defence</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
-  </head>
-  
-  <body>
-    
-    <div id="canvas-holder">
-      <canvas id="canvas"></canvas>
-    </div>
-    <div class="store">
-      <div style="display:flex; flex-direction: row;"><h1>🧡</h1><h1 id="lives"> </h1></div>
-      <div style="display:flex; flex-direction: row;"><h1>💊</h1> <h1 id="cash"></h1></div>
-     
-      <button id="buy-turret">NEW TURRS</button>
-      <button id="start">Play</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HYPER DEFENSE</title>
+    <!-- <link href="/style-landing-page.css" rel="stylesheet"> -->
+</head>
+<body>
+    <div id="container">
+        <img class="post-it" id="post-it-1" src="media/images/post-it-you.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-2" src="media/images/post-it-why.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-3" src="media/images/post-it-what.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-4" src="media/images/post-it-trust.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-5" src="media/images/post-it-step.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-6" src="media/images/post-it-speak.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-7" src="media/images/post-it-reflection.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-10" src="media/images/post-it-how.svg" width="100%" height="auto">
 
+        <h1 id="header" class="item">HYPER DEFENSE</h1>
+        <div id="info-wrapper">
+            <p id="info-text" class="item">Get the true HYPER ISLAND experience!
+            As head of the PM:s your job is to infuse the students with knowledge.
+            <br>
+            As for now, you have all the information you need.<br>
+            In true hyper spirit of learning by doing;
+            <br><br>
+            – let’s give it a try!</p>
+        </div>
+            <!-- Play button -->
+            <a href="game.html" id="play-button" class="item">
+                <img src="media/images/play-button.svg" width="100%" height="auto">
+            </a>
+        
+        <!-- read more button  -->
+        <a id="read-more-button" class="item">
+            <p>READ MORE</p>
+        </a>
+        <!-- boxes img right-->
+        <img id="box" src="media/images/box.svg" width="10.5%" height="auto">
+        <img id="boxes-img" src="media/images/boxes.svg" width="100%" height="auto"> 
+        <img class="post-it" id="post-it-8" src="media/images/post-it-lead.svg" width="100%" height="auto">
+        <img class="post-it" id="post-it-9" src="media/images/post-it-if.svg" width="100%" height="auto">
     </div>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.3.1/Tween.min.js"></script> -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-  </body>
+    <script src="scripts/script-landing-page.js"></script>
+</body>
 </html>

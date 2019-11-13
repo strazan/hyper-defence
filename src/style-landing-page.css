@@ -29,7 +29,7 @@
 body {
     margin: 0;
     background-image: linear-gradient(to left, #0e0118, #2d0946);
-    color: #dd9bf7;
+    color: #dfa9f5;
 }
 
 #container {
@@ -37,6 +37,75 @@ body {
     grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
     grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
 }
+
+@-webkit-keyframes fallingLeaves {
+    0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) rotateZ(0deg);
+    }
+    75% {
+    opacity: 1;
+    -webkit-transform: translate(100px, 700px) rotateZ(270deg);
+    }
+    100% {
+    opacity: 0;
+    -webkit-transform: translate(150px, 1000px) rotateZ(360deg);
+    }
+    }
+
+.post-it {
+    display: inline-grid;
+    grid-row-start: 2;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: -280px 40px 54px -34px;
+    -webkit-animation: fallingLeaves 10s infinite linear;
+    -moz-animation: fallingLeaves 10s infinite linear;
+    align-content: flex-start;
+}
+
+#post-it-1 {
+    grid-column-start: 1;
+    animation-delay: 3s;
+}
+#post-it-2 {
+    grid-column-start: 3;
+    animation-delay: 6s;
+}
+#post-it-3 {
+    grid-column-start: 5;
+    animation-delay: 13s;
+}
+#post-it-4 {
+    grid-column-start: 7;
+    animation-delay: 11s;
+}
+#post-it-5 {
+    grid-column-start: 9;
+    animation-delay: 8s;
+}
+#post-it-6 {
+    grid-column-start: 11;
+    animation-delay: 3s;
+}
+#post-it-7 {
+    grid-column-start: 13;
+    animation-delay: 10s;
+}
+#post-it-8 {
+    grid-column-start: 15;
+    animation-delay: 6s;
+}
+#post-it-9 {
+    grid-column-start: 17;
+    animation-delay: 3s;
+}
+#post-it-10 {
+    grid-column-start: 19;
+    animation-delay: 9s;
+}
+
 
 #header {
     display: inline-grid;
@@ -62,12 +131,15 @@ body {
 
 #play-button {
     display: inline-grid;
+    grid-column-start: 5;
+    grid-column-end: 7;
+    grid-row-start: 7;
     align-items: center;
     justify-items: center;
     animation-name: scale-up-center;
     animation-duration: 1.5s;
     animation-iteration-count: infinite;
-    padding-top: 10%;
+    margin: 0;
 }
 
 #read-more-button {
