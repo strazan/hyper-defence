@@ -2,20 +2,20 @@ const astar = require('./astar');
 
 const mapString = `
 xxxxxxxxxxxxxxxx
-x-x-------x----x
-x-x--x----x----x
-x-x--x----x----x
-x-x--x----x----x
-x-x--x----x----x
-x-x--x----x----x
-x-x--x----x-x--x
-x-x--xx--xx-x-xx
-x-x--x---x--x--x
-x-x--x---x--x--x
-x----x---x--x--x
-x----x---x-xxx-x
-x----x---x-x---x
-x----x-----x---x
+x-x---x---x----x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x-x-x-x-x-x-x--x
+x---x---x---x--x
 xxxxxxxxxxxxxxxx
 `;
 // Convert into array matrix

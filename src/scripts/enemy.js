@@ -1,3 +1,5 @@
+ /* --------------------------------------------------------------------- #4 */
+
 class Enemy {
     constructor(x, y, path) {
         // this.color = [0, 0, 0];
@@ -11,16 +13,37 @@ class Enemy {
         }
 
         this.name = 'enemy';
-        this.cash = 1;
-        this.speed = 1;
+        this.cash = 10;
+        this.speed = 500;
         this.step = -1;
+        this.isHit = false;
 
         // this.ts = ts;
-        this.health = 100;
+        this.health = 10;
         this.moveTimer = 450;
-        // this.image = sk.loadImage('../media/images/rainbow.jpg')
 
+        // this.template = template
+        this.image = new Image(200, 200)
+       
+        // this.image = sk.loadImage('../media/images/rainbow.jpg')
     }
+
+    loadFromTemplate(template) {
+        switch (template) {
+            case 'weak':
+                this.cash = 5;
+                this.image.src = '../media/images/enemies/student-blue.svg'
+                break;
+            case 'medium':
+                this.cash = 10;
+                this.speed = 700;
+                this.health = 20;
+                this.image.src = '../media/images/enemies/student-pink.svg'
+                break;
+        }
+    }
+
+
 
     // draw() {
     //   console.log(sk)
