@@ -10,9 +10,9 @@ let levels = {
     one: {
         enemies: [{
             type: 'weak',
-            spawnFrequency: 2000,
+            spawnFrequency: 800,
             spawnTimer: 0,
-            toSpawn: []
+            toSpawn: load('weak', 30)
         }]
     },
     two: {
@@ -20,48 +20,39 @@ let levels = {
             type: 'weak',
             spawnFrequency: 2000,
             spawnTimer: 0,
-            toSpawn: []
+            toSpawn: load('weak', 20)
         },
         {
-            type: 'fed',
+            type: 'medium',
             spawnFrequency: 3000,
-            spawnTimer: 2000,
-            toSpawn: []
+            spawnTimer: -5000,
+            toSpawn: load('medium', 15)
+        }]
+    },
+    three: {
+        enemies: [{
+            type: 'weak',
+            spawnFrequency: 2000,
+            spawnTimer: 0,
+            toSpawn: load('weak', 20)
+        },
+        {
+            type: 'medium',
+            spawnFrequency: 2000,
+            spawnTimer: 1000,
+            toSpawn: load('medium', 35)
         }]
     }
 }
 
-
-////// MAKE BETTER xD 
-loadLevel('one', [{
-    type: 'bd',
-    amount: 10,
-}])
-
-loadLevel('two', [{
-    type: 'bd',
-    amount: 13,
-}])
-// , {
-//     type: 'fed',
-//     amount: 5,
-// }])
-
-for (let i = 0; i < 5; i++) {
-    let enemy = new Enemy(1, 1, path)
-    enemy.loadFromTemplate('fed')
-    levels.two.enemies[1].toSpawn.push(enemy)
-}
-
-function loadLevel(lvl, enemies) {
-
-    enemies.forEach(e => {
-        for (let i = 0; i < e.amount; i++) {
-            let enemy = new Enemy(1, 1, path)
-            enemy.loadFromTemplate(e.type)
-            levels[lvl].enemies[0].toSpawn.push(enemy)
-        }
-    })
+function load(type, amount){
+    let enemies = []
+    for (let i = 0; i < amount; i++) {
+        let enemy = new Enemy(1, 1, path)
+        enemy.loadFromTemplate(type)
+        enemies.push(enemy)
+    }
+    return enemies
 
 }
 
