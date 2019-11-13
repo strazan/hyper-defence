@@ -1,3 +1,6 @@
+
+
+
 /*
 ------ TODO -------
 In no order.
@@ -25,6 +28,7 @@ In no order.
 #10 rename all to either turrets or towers ffs.
 
 */
+
 import './../style.css'
 import {
     Turret
@@ -34,6 +38,12 @@ const _levels = require('./levels')
 const _map = require('./map')
 const tile_WALL = _map.getMap().tile
 const ts = Math.floor(window.innerHeight / 16)
+const backgroundSound = new Audio("media/sounds/gestures.wav")
+backgroundSound.loop = true;
+
+                    function startSound(){
+                        backgroundSound.play();
+                    }
 
 const canvas = document.getElementById('canvas');
 const butTurrBtn = document.getElementById('buy-turret')
@@ -66,6 +76,9 @@ let state = {
     level: 0,
 };
 
+let isdeathSoundplaying = false;
+
+
 function buyNewTurret() {
     buyingTurr = true
     window.addEventListener('mousemove', evt => {
@@ -80,6 +93,7 @@ function buyNewTurret() {
 }
 
 function startLevel() {
+    startSound();
 
     state.level++
     let nextLvl = '';
@@ -206,8 +220,17 @@ function getState(oldState) {
                 turret.fired = false
 
 
+
                 if (turret.target.health <= 0) {
                     turret.target.isAlive = false;
+                    if(!isdeathSoundplaying){
+
+                        turret.target.deathSound.play()
+                        isdeathSoundplaying = true;
+                        setTimeout(() => {
+                            isdeathSoundplaying = false;
+                        }, 2000);
+                    }
 
                     cash += turret.target.cash
                     domCash.innerHTML = cash

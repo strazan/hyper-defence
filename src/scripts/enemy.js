@@ -24,9 +24,13 @@ class Enemy {
 
         // this.template = template
         this.image = new Image(200, 200)
+        this.deathSound = new Audio("media/sounds/aha.wav")
+        this.deathSound.volume = 0.3; 
+
        
         // this.image = sk.loadImage('../media/images/rainbow.jpg')
     }
+    
 
     loadFromTemplate(template) {
         switch (template) {
