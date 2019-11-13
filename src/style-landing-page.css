@@ -20,24 +20,6 @@
         transform: translateY(164%) translateX(0);
     }
 }
-
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background-image: linear-gradient(to left, #0e0118, #2d0946);
-    color: #dfa9f5;
-}
-
-#container {
-    display: inline-grid;
-    grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
-    grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
-}
-
 @-webkit-keyframes fallingLeaves {
     0% {
     opacity: 1;
@@ -51,7 +33,26 @@ body {
     opacity: 0;
     -webkit-transform: translate(150px, 1000px) rotateZ(360deg);
     }
-    }
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-image: linear-gradient(to left, #0e0118, #2d0946);
+    color: #d897f1;
+}
+
+#container {
+    display: inline-grid;
+    grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
+    grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
+}
+
+
 
 .post-it {
     display: inline-grid;
