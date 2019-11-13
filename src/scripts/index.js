@@ -27,6 +27,8 @@ import {
 
 const _levels = require('./levels')
 const _map = require('./map')
+const _modal = require('./modal')
+
 
 const tile_WALL = _map.getMap().tile
 const ts = Math.floor(window.innerHeight / 16)
