@@ -78,6 +78,33 @@ let levels = {
                 toSpawn: load('hard', 35)
             }
         ]
+    },
+    four: {
+        enemies: [{
+                type: 'weak',
+                spawnFrequency: 100,
+                spawnTimer: 0,
+                toSpawn: load('weak', 50)
+            },
+            {
+                type: 'weak',
+                spawnFrequency: 100,
+                spawnTimer: -8000,
+                toSpawn: load('weak', 50)
+            },
+            {
+                type: 'weak',
+                spawnFrequency: 100,
+                spawnTimer: -16000,
+                toSpawn: load('weak', 50)
+            },
+            {
+                type: 'medium',
+                spawnFrequency: 2000,
+                spawnTimer: 1000,
+                toSpawn: load('medium', 30)
+            }
+        ]
     }
 }
 

@@ -25,6 +25,7 @@ In no order.
 #10 rename all to either turrets or towers ffs.
 
 */
+
 import './../style.css'
 import {
     Turret
@@ -53,6 +54,12 @@ let buyingTurr = null;
 let hoveredTurret = null;
 let mousePos = {}
 
+const backgroundSound = new Audio("media/sounds/gestures.wav")
+backgroundSound.loop = true;
+let isdeathSoundplaying = false;
+function startSound() {
+    backgroundSound.play();
+}
 domCash.innerHTML = cash;
 domLives.innerHTML = lives;
 
@@ -93,9 +100,11 @@ let state = {
     level: 0,
 };
 
+
 function buyNewTurret(type) {
     buyingTurr = new Turret(0, 0)
     buyingTurr.loadFromTemplate(type)
+
     window.addEventListener('mousemove', evt => {
         mousePos = getMousePos(canvas, evt)
     })
@@ -108,6 +117,7 @@ function buyNewTurret(type) {
 }
 
 function startLevel() {
+    startSound();
 
     state.level++
     let nextLvl = '';
@@ -131,7 +141,7 @@ function startLevel() {
 }
 
 function canPlaceTower(pos, turret) {
-    console.log(pos,turret)
+    console.log(pos, turret)
     return state.map[pos.y][pos.x] === 1 &&
         !(state.turrets.some(t => {
             return t.position.x === pos.x && t.position.y === pos.y
@@ -261,8 +271,17 @@ function getState(oldState) {
                 turret.fired = false
 
 
+
                 if (turret.target.health <= 0) {
                     turret.target.isAlive = false;
+                    if (!isdeathSoundplaying) {
+
+                        turret.target.deathSound.play()
+                        isdeathSoundplaying = true;
+                        setTimeout(() => {
+                            isdeathSoundplaying = false;
+                        }, 2000);
+                    }
 
                     cash += turret.target.cash
                     domCash.innerHTML = cash
