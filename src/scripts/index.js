@@ -46,10 +46,10 @@ const buyPmTwo = document.getElementById('turret-pm-two')
 const buyPmThree = document.getElementById('turret-pm-three')
 const buyEskil = document.getElementById('turret-eskil')
 const context = canvas.getContext('2d');
-canvas.width = window.innerHeight;
-canvas.height = window.innerHeight;
+canvas.width = window.innerHeight - 16;
+canvas.height = window.innerHeight - 16;
 
-let cash = 100;
+let cash = 100; // mpve to state
 let lives = 100
 const domCash = document.getElementById('cash')
 const domLives = document.getElementById('lives')
@@ -61,6 +61,7 @@ let mousePos = {}
 const backgroundSound = new Audio("media/sounds/gestures.wav")
 backgroundSound.loop = true;
 let isdeathSoundplaying = false;
+
 function startSound() {
     backgroundSound.play();
 }
@@ -119,12 +120,12 @@ function buyNewTurret(type) {
     })
 }
 
-function loadStoreInfo(turret){
-document.getElementById('turret-info__title').innerHTML = `Name: ${turret.name}`
-document.getElementById('turret-info__radius').innerHTML = `Radius: ${turret.radius}`
-document.getElementById('turret-info__damage').innerHTML = `Damage: ${turret.damage}`
-document.getElementById('turret-info__speed').innerHTML = `Speed: ${turret.speed}`
-document.getElementById('turret-info__cost').innerHTML = `Cost: ${turret.cost}`
+function loadStoreInfo(turret) {
+    document.getElementById('turret-info__title').innerHTML = `Name: ${turret.name}`
+    document.getElementById('turret-info__radius').innerHTML = `Radius: ${turret.radius}`
+    document.getElementById('turret-info__damage').innerHTML = `Damage: ${turret.damage}`
+    document.getElementById('turret-info__speed').innerHTML = `Speed: ${turret.speed}`
+    document.getElementById('turret-info__cost').innerHTML = `Cost: ${turret.cost}`
 }
 
 function startLevel() {
@@ -145,6 +146,9 @@ function startLevel() {
         case 4:
             nextLvl = 'four'
             break;
+        case 5:
+            nextLvl = 'five'
+            break;
     }
 
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
@@ -163,7 +167,7 @@ function placeNewTower(pos) {
     buyingTurr.position = pos
     state.turrets.push(buyingTurr)
 
-    cash -= 100
+    cash -= buyingTurr.cost
     domCash.innerHTML = cash;
 }
 
