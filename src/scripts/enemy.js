@@ -51,14 +51,14 @@
                  break;
              case 'fly':
                  this.cash = 12;
-                 this.speed = 2200;
-                 this.health = 30;
+                 this.speed = 100;
+                 this.health = 40;
                  this.image.src = '../media/images/enemies/student-purple.svg'
                  break;
              case 'boss':
-                 this.cash = 50;
-                 this.speed = 400;
-                 this.health = 400;
+                 this.cash = 40;
+                 this.speed = 1200;
+                 this.health = 500;
                  this.image.src = '../media/images/enemies/student-red.svg'
                  break;
          }
