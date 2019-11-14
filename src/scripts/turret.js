@@ -8,9 +8,9 @@
              y: y,
          }
 
-         this.radius = 5;
+         this.radius = 3.5;
          this.shootTimer = 0
-         this.damage = 5
+         this.damage = 4
          this.speed = 1000
          this.cost = 100
          this.fired = false
@@ -31,9 +31,9 @@
         this.name = template
          switch (template) {
              case 'pm-two':
-                 this.radius = 2
+                 this.radius = 2.5
                  this.speed = 300
-                 this.damage = 2
+                 this.damage = 3
                  this.cost = 150
                  this.bullet.travelSpeed = 180;
                  this.bullet.src = '../media/images/turrets/rick.png'
