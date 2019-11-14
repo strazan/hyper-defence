@@ -1,41 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>tower-defence</title>
-    <!-- <link rel="stylesheet" href="style.css" /> -->
-  </head>
-  
-  <body>
-    
-    <div id="canvas-holder">
-      <canvas id="canvas"></canvas>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>tower-defence</title>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+</head>
+
+<body>
+
+  <div id="canvas-holder">
+    <canvas id="canvas"></canvas>
+  </div>
+  <div class="store">
+    <div style="display:flex; flex-direction: row;">
+      <h1 style="font-weight: 200;">Health _</h1>
+      <h1 id="lives"></h1>
     </div>
-    <div class="store">
-      <div style="display:flex; flex-direction: row;"><h1>🧡</h1><h1 id="lives"> </h1></div>
-      <div style="display:flex; flex-direction: row;"><h1>💊</h1> <h1 id="cash"></h1></div>
-     
-      <div class="staff">
-        <button id="turret-pm-one">pm 1</button>
-        <button id="turret-pm-two">pm 2</button>
-        <button id="turret-pm-three">pm 3</button>
-        <button id="turret-eskil">Eskil</button>
-        
-      </div>
-      <div id="turret-info">
-        <h2 id="turret-info__title"></h2>
-        <h2 id="turret-info__radius"></h2>
-        <h2 id="turret-info__damage"></h2>
-        <h2 id="turret-info__speed"></h2>
-        <h2 id="turret-info__cost"></h2>
-      </div>
-      <button id="start">Play</button>
+    <div style="display:flex; flex-direction: row;">
+      <h1 style="font-weight: 200;">XP _</h1>
+      <h1 id="cash"></h1>
+    </div>
+
+    <div class="staff">
+      <button id="turret-pm-one"></button>
+      <button id="turret-pm-two"></button>
+      <button id="turret-pm-three"></button>
+      <button id="turret-eskil"></button>
 
     </div>
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.3.1/Tween.min.js"></script> -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
-  </body>
+    <div id="turret-info">
+
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Damage _</h2>
+        <h2 id="turret-info__damage"></h2>
+      </div>
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Speed _</h2>
+        <h2 id="turret-info__speed"></h2>
+      </div>
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Cost _</h2>
+        <h2 id="turret-info__cost"></h2>
+      </div>
+    </div>
+    <button id="start"></button>
+
+  </div>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.3.1/Tween.min.js"></script> -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+</body>
+
 </html>

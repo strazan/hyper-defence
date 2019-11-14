@@ -2,7 +2,7 @@
 
  class Turret {
      constructor(x, y) {
-        this.name = 'pm one'
+        this.name = 'pm-one'
          this.position = {
              x: x,
              y: y,
@@ -16,7 +16,7 @@
          this.fired = false
 
          this.image = new Image(200, 200)
-         this.image.src = '../media/images/turrets/monster.svg'
+         this.image.src = '../media/images/turrets/pm-pink.svg'
 
          this.bullet = new Image(200, 200)
          this.bullet.position = {
@@ -32,11 +32,12 @@
          switch (template) {
              case 'pm-two':
                  this.radius = 2.5
-                 this.speed = 300
+                 this.speed = 330
                  this.damage = 3
                  this.cost = 150
                  this.bullet.travelSpeed = 180;
-                 this.bullet.src = '../media/images/turrets/rick.png'
+                 this.image.src = '../media/images/turrets/pm-orange.svg'
+                 this.bullet.src = '../media/images/turrets/post-it-information.svg'
                  break;
 
              case 'pm-three':
@@ -44,15 +45,17 @@
                  this.speed = 3000
                  this.damage = 12
                  this.cost = 200
+                 this.bullet.src = '../media/images/post-it-reflection.svg'
+                 this.image.src = '../media/images/turrets/pm-green.svg'
                  break;
 
              case 'eskil':
                  this.radius = 7
-                 this.speed = 300
+                 this.speed = 280
                  this.damage = 10
                  this.cost = 1000
                  this.bullet.travelSpeed = 160;
-                 this.bullet.src = '../media/images/turrets/zero.svg'
+                 this.image.src = '../media/images/turrets/pm-eskil.svg'
 
          }
      }
