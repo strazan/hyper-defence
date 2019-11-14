@@ -1,6 +1,7 @@
 const _levels = require('./index')
 import './../style-landing-page.css'
 
+console.log('land')
 
 
 // const playButton = document.getElementById('play-button');
