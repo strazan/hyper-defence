@@ -99,7 +99,7 @@ let levels = {
                 spawnTimer: -16000,
                 toSpawn: load('weak', 50)
             },
-            
+
             {
                 type: 'weak',
                 spawnFrequency: 100,
@@ -113,23 +113,36 @@ let levels = {
                 toSpawn: load('medium', 30)
             }
         ]
-    },five: {
-        enemies: [
-            {
+    },
+    five: {
+        enemies: [{
                 spawnFrequency: 500,
                 spawnTimer: -6000,
                 toSpawn: load('medium', 40)
             },
-            
+
             {
-                spawnFrequency: 300,
+                spawnFrequency: 1000,
                 spawnTimer: -1000,
-                toSpawn: load('medium', 40)
+                toSpawn: load('fly', 40)
             },
             {
                 spawnFrequency: 2500,
                 spawnTimer: 1000,
                 toSpawn: load('hard', 60)
+            }
+        ]
+    },
+    six: {
+        enemies: [{
+                spawnFrequency: 3000,
+                spawnTimer: 2400,
+                toSpawn: load('fly', 100)
+            },
+            {
+                spawnFrequency: 5000,
+                spawnTimer: 1000,
+                toSpawn: load('boss', 20)
             }
         ]
     }
