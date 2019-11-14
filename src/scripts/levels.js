@@ -10,11 +10,12 @@ let levels = {
     one: {
         enemies: [{
             type: 'weak',
-            spawnFrequency: 2000,
-            spawnTimer: 0,
+            spawnFrequency: 1800,
+            spawnTimer: 1000,
             //CHANGE AMPUT
             toSpawn: load('weak', 20)
-        }]
+        }],
+        reward: 50
     },
     two: {
         enemies: [{
@@ -98,11 +99,37 @@ let levels = {
                 spawnTimer: -16000,
                 toSpawn: load('weak', 50)
             },
+            
+            {
+                type: 'weak',
+                spawnFrequency: 100,
+                spawnTimer: -21000,
+                toSpawn: load('weak', 50)
+            },
             {
                 type: 'medium',
                 spawnFrequency: 2000,
                 spawnTimer: 1000,
                 toSpawn: load('medium', 30)
+            }
+        ]
+    },five: {
+        enemies: [
+            {
+                spawnFrequency: 500,
+                spawnTimer: -6000,
+                toSpawn: load('medium', 40)
+            },
+            
+            {
+                spawnFrequency: 300,
+                spawnTimer: -1000,
+                toSpawn: load('medium', 40)
+            },
+            {
+                spawnFrequency: 2500,
+                spawnTimer: 1000,
+                toSpawn: load('hard', 60)
             }
         ]
     }

@@ -10,6 +10,11 @@ body {
   align-items: center;
 }
 
+canvas {
+  margin: 0;
+  padding: 8px;
+}
+
 button {
   width: 100px;
   height: 100px;
@@ -26,10 +31,12 @@ h1 {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0 20px;
 }
 
 #turret-info {
   height: 30vh;
+  width: 300px;
 }
 
 #turret-info h2 {
