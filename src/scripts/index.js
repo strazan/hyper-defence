@@ -100,11 +100,10 @@ let state = {
     level: 0,
 };
 
-
 function buyNewTurret(type) {
     buyingTurr = new Turret(0, 0)
     buyingTurr.loadFromTemplate(type)
-
+    loadStoreInfo(buyingTurr)
     window.addEventListener('mousemove', evt => {
         mousePos = getMousePos(canvas, evt)
     })
@@ -114,6 +113,14 @@ function buyNewTurret(type) {
             buyingTurr = null
         }
     })
+}
+
+function loadStoreInfo(turret){
+document.getElementById('turret-info__title').innerHTML = `Name: ${turret.name}`
+document.getElementById('turret-info__radius').innerHTML = `Radius: ${turret.radius}`
+document.getElementById('turret-info__damage').innerHTML = `Damage: ${turret.damage}`
+document.getElementById('turret-info__speed').innerHTML = `Speed: ${turret.speed}`
+document.getElementById('turret-info__cost').innerHTML = `Cost: ${turret.cost}`
 }
 
 function startLevel() {

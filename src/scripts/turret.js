@@ -2,7 +2,7 @@
 
  class Turret {
      constructor(x, y) {
-
+        this.name = 'pm one'
          this.position = {
              x: x,
              y: y,
@@ -28,6 +28,7 @@
          this.bullet.src = '../media/images/turrets/post-it-why.svg'
      }
      loadFromTemplate(template) {
+        this.name = template
          switch (template) {
              case 'pm-two':
                  this.radius = 2

@@ -31,3 +31,7 @@ h1 {
 #turret-info {
   height: 30vh;
 }
+
+#turret-info h2 {
+  color: #fff;
+}
