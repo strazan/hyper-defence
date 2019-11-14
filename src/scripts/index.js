@@ -261,7 +261,7 @@ function getState(oldState) {
         const turret = state.turrets[i];
 
         /* --------------------------------------------------------------------- #8 */
-        if (!turret.target && state.enemies.length > 0) {
+        if (state.enemies.length > 0) {
             turret.target = getTurretTarget(turret);
         }
         if (turret.target && !turret.target.isAlive) {
