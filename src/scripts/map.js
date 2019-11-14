@@ -44,7 +44,7 @@ map.path = astar.getPath(
 );
 
 const tile = new Image(100,100)
-tile.src = ('../media/images/map/tile-purple.svg')
+tile.src = ('../media/images/glowing-box.svg')
 
 map.tile = tile
 
