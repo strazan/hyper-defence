@@ -2,20 +2,20 @@ const astar = require('./astar');
 
 const mapString = `
 xxxxxxxxxxxxxxxx
-x-x---x---x----x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x-x-x-x-x-x-x--x
-x---x---x---x--x
+x-x------------x
+x-x-xxxxxxxxxx-x
+x-x-x--------x-x
+x-x-x-xxxxxx-x-x
+x-x-x-x----x-x-x
+x-x-x-x-xx-x-x-x
+x-x-x-x--x-x-x-x
+x-x-x-x--x-x-x-x
+x-x-x-xxxx-x-x-x
+x-x-x------x-x-x
+x-x-xxxxxxxx-x-x
+x-x----------x-x
+x-xxxxxxxxxxxx-x
+x--------------x
 xxxxxxxxxxxxxxxx
 `;
 // Convert into array matrix
@@ -35,8 +35,8 @@ map.spawn = {
 }
 
 map.end = {
-  x: 14,
-  y: 14,
+  x: 8,
+  y: 8,
 }
 
 map.path = astar.getPath(
