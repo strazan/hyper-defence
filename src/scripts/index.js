@@ -145,6 +145,9 @@ function startLevel() {
         case 5:
             nextLvl = 'five'
             break;
+        case 6:
+            nextLvl = 'six'
+            break;
     }
 
     state.toSpawn = _levels.getLevels()[nextLvl].enemies

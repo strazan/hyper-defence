@@ -25,7 +25,7 @@
          // this.template = template
          this.image = new Image(200, 200)
          this.deathSound = new Audio("media/sounds/aha.wav")
-         this.deathSound.volume = 0.3; 
+         this.deathSound.volume = 0.3;
 
          // this.image = sk.loadImage('../media/images/rainbow.jpg')
      }
@@ -47,7 +47,19 @@
                  this.cash = 15;
                  this.speed = 400;
                  this.health = 80;
-                 this.image.src = '../media/images/enemies/student-pink.svg'
+                 this.image.src = '../media/images/enemies/student-orange.svg'
+                 break;
+             case 'fly':
+                 this.cash = 12;
+                 this.speed = 2200;
+                 this.health = 30;
+                 this.image.src = '../media/images/enemies/student-purple.svg'
+                 break;
+             case 'boss':
+                 this.cash = 50;
+                 this.speed = 400;
+                 this.health = 400;
+                 this.image.src = '../media/images/enemies/student-red.svg'
                  break;
          }
      }
