@@ -1,0 +1,178 @@
+@font-face {
+    font-family: 'dotty'; /*a name to be used later*/
+    src: url('/./media/font/DottyShadow.ttf'); /*URL to font*/
+  }
+
+  
+
+@keyframes scale-up-center {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes slide-down {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+    100% {
+        transform: translateY(164%) translateX(0);
+    }
+}
+@-webkit-keyframes fallingLeaves {
+    0% {
+    opacity: 1;
+    -webkit-transform: translate(0, 0) rotateZ(0deg);
+    }
+    75% {
+    opacity: 1;
+    -webkit-transform: translate(100px, 700px) rotateZ(270deg);
+    }
+    100% {
+    opacity: 0;
+    -webkit-transform: translate(150px, 1000px) rotateZ(360deg);
+    }
+}
+
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background-image: linear-gradient(to left, #0e0118, #2d0946);
+    color: #d897f1;
+}
+
+#container {
+    display: inline-grid;
+    grid-template-columns: 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw 5vw;
+    grid-template-rows: 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh 10vh;
+}
+
+
+
+.post-it {
+    display: inline-grid;
+    grid-row-start: 2;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: -280px 40px 54px -34px;
+    -webkit-animation: fallingLeaves 10s infinite linear;
+    -moz-animation: fallingLeaves 10s infinite linear;
+    align-content: flex-start;
+}
+
+#post-it-1 {
+    grid-column-start: 1;
+    animation-delay: 3s;
+}
+#post-it-2 {
+    grid-column-start: 3;
+    animation-delay: 6s;
+}
+#post-it-3 {
+    grid-column-start: 5;
+    animation-delay: 13s;
+}
+#post-it-4 {
+    grid-column-start: 7;
+    animation-delay: 11s;
+}
+#post-it-5 {
+    grid-column-start: 9;
+    animation-delay: 8s;
+}
+#post-it-6 {
+    grid-column-start: 11;
+    animation-delay: 3s;
+}
+#post-it-7 {
+    grid-column-start: 13;
+    animation-delay: 10s;
+}
+#post-it-8 {
+    grid-column-start: 15;
+    animation-delay: 6s;
+}
+#post-it-9 {
+    grid-column-start: 17;
+    animation-delay: 3s;
+}
+#post-it-10 {
+    grid-column-start: 19;
+    animation-delay: 9s;
+}
+
+
+#header {
+    display: inline-grid;
+    grid-column-start: 2;
+    grid-column-end: 12;
+    grid-row-start: 3;
+    /* align-items: center; */
+    font-size: 5vw;
+    margin: 0;
+    font-family: dotty;
+}
+
+#info-wrapper {
+    margin: 0;
+    display: inline-grid;
+    grid-column-start: 2;
+    grid-column-end: 12;
+    grid-row-start: 4;
+    /* font-family: alien encounters; */
+    font-size: 1vw;
+    padding-top: 5%;
+}
+
+#play-button {
+    display: inline-grid;
+    grid-column-start: 5;
+    grid-column-end: 7;
+    grid-row-start: 7;
+    align-items: center;
+    justify-items: center;
+    animation-name: scale-up-center;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    margin: 0;
+}
+
+#read-more-button {
+    display: inlinge-grid;
+    align-items: center;
+    justify-items: center;
+    grid-column-start: 2;
+    grid-column-end: 4;
+    /* font-family: alien encounters; */
+    margin-top: 10%;
+    font-size: 1vw;
+
+}
+
+#box {
+    position: absolute;
+    top: 0;
+    left: 74.7%;
+    animation-name: slide-down;
+    animation-duration: 5s;
+    justify-items: left;
+    animation-fill-mode: forwards;
+}
+
+#boxes-img {
+    grid-column-start: 6;
+    grid-column-end: 21;
+    grid-row-start: 5;
+}

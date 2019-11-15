@@ -2,16 +2,32 @@
   "name": "tower-defence",
   "version": "1.0.0",
   "description": "Best tower defence ever made",
-  "main": "main.js",
+  "main": "index.js",
   "scripts": {
-    "start": "nodemon server/main.js"
+    "build": "NODE_ENV=production webpack --config webpack.config.js",
+    "start": "webpack-dev-server --open",
+    "format": "prettier --single-quote --write \"src/**/*.{html,css,js}\""
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.17.1"
+    "@tweenjs/tween.js": "^18.4.2"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "autoprefixer": "^9.6.1",
+    "babel-loader": "^8.0.6",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.0.4",
+    "css-loader": "^3.2.0",
+    "cssnano": "^4.1.10",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.8.0",
+    "postcss-loader": "^3.0.0",
+    "prettier": "1.18.2",
+    "webpack": "^4.40.2",
+    "webpack-cli": "^3.3.9",
+    "webpack-dev-server": "^3.8.1"
   }
 }
