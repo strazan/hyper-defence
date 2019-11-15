@@ -15,7 +15,7 @@ module.exports = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'inline-source-map',
     entry: [
-        './src/scripts/script-landing-page.js',
+        './src/scripts/landing-page.js',
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
@@ -23,7 +23,7 @@ module.exports = {
     },
     devServer: {
         contentBase: './dist',
-        port: 3009
+        port: 3000
     },
     module: {
         rules: [
