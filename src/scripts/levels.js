@@ -75,9 +75,9 @@ let levels = {
             },
             {
                 type: 'hard',
-                spawnFrequency: 1500,
+                spawnFrequency: 2000,
                 spawnTimer: 1000,
-                toSpawn: load('hard', 35)
+                toSpawn: load('hard', 20)
             }
         ]
     },

@@ -2,7 +2,7 @@
 
  class Turret {
      constructor(x, y) {
-        this.name = 'pm-one'
+         this.name = 'pm-one'
          this.position = {
              x: x,
              y: y,
@@ -28,7 +28,15 @@
          this.bullet.src = '../media/images/turrets/post-it-why.svg'
      }
      loadFromTemplate(template) {
-        this.name = template
+         this.name = template
+         if(template === 'eskil'){
+            setInterval(() => {
+
+                let rand = Math.floor(Math.random()*2)
+                rand === 0?  this.bullet.src = '../media/images/turrets/0.svg' :  this.bullet.src = '../media/images/turrets/1.svg'
+             }, 140)
+         }
+        
          switch (template) {
              case 'pm-two':
                  this.radius = 2.5
@@ -55,6 +63,7 @@
                  this.damage = 10
                  this.cost = 1000
                  this.bullet.travelSpeed = 160;
+                 this.bullet.src = '../media/images/turrets/0.svg'
                  this.image.src = '../media/images/turrets/pm-eskil.svg'
 
          }

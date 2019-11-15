@@ -48,6 +48,7 @@ let lives = 42
 const domCash = document.getElementById('cash')
 const domLives = document.getElementById('lives')
 const btnPlay = document.getElementById('start')
+const domLevel = document.getElementById('level')
 let buyingTurr = null;
 let hoveredTurret = null;
 let mousePos = {}
@@ -172,6 +173,7 @@ function startLevel() {
     }
 
     //change color of btn?
+    domLevel.innerHTML = state.level;
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
     btnPlay.disabled = true;
     btnPlay.style.opacity = 0.3
