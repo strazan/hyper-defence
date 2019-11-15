@@ -14,6 +14,7 @@ let levels = {
             spawnTimer: 1000,
             //CHANGE AMPUT
             toSpawn: load('weak', 20)
+
         }],
         reward: 50
     },
@@ -135,9 +136,9 @@ let levels = {
     },
     six: {
         enemies: [{
-                spawnFrequency: 3000,
+                spawnFrequency: 1500,
                 spawnTimer: 2400,
-                toSpawn: load('fly', 100)
+                toSpawn: load('fly', 80)
             },
             {
                 spawnFrequency: 5000,
@@ -145,6 +146,13 @@ let levels = {
                 toSpawn: load('boss', 20)
             }
         ]
+    },
+    seven: {
+        enemies: [{
+            spawnFrequency: 1000,
+            spawnTimer: 0,
+            toSpawn: load('mega-boss', 1)
+        }]
     }
 }
 

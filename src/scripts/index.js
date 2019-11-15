@@ -31,6 +31,7 @@ import './../style-modal.css'
 import {
     Turret
 } from './turret'
+import { brotliDecompressSync } from 'zlib'
 
 const _levels = require('./levels')
 const _map = require('./map')
@@ -41,6 +42,9 @@ const tile_WALL = _map.getMap().tile
 const ts = Math.floor(window.innerHeight / 16)
 
 const canvas = document.getElementById('canvas');
+let animationFrame;
+
+const turretInfo = document.getElementById('turret-info')
 const buyPmOne = document.getElementById('turret-pm-one')
 const buyPmTwo = document.getElementById('turret-pm-two')
 const buyPmThree = document.getElementById('turret-pm-three')
@@ -50,7 +54,7 @@ canvas.width = window.innerHeight - 16;
 canvas.height = window.innerHeight - 16;
 
 let cash = 100; // mpve to state
-let lives = 100
+let lives = 10
 const domCash = document.getElementById('cash')
 const domLives = document.getElementById('lives')
 const btnPlay = document.getElementById('start')
@@ -106,9 +110,11 @@ let state = {
 };
 
 function buyNewTurret(type) {
+
     buyingTurr = new Turret(0, 0)
     buyingTurr.loadFromTemplate(type)
     loadStoreInfo(buyingTurr)
+    turretInfo.style.visibility = 'visible';
     window.addEventListener('mousemove', evt => {
         mousePos = getMousePos(canvas, evt)
     })
@@ -116,16 +122,35 @@ function buyNewTurret(type) {
         if (buyingTurr && canPlaceTower(getTilePos(mousePos), buyingTurr)) {
             placeNewTower(getTilePos(mousePos))
             buyingTurr = null
+            turretInfo.style.visibility = 'hidden';
+        } else {
+            buyingTurr = null
+            turretInfo.style.visibility = 'hidden';
+
         }
     })
 }
 
 function loadStoreInfo(turret) {
-    document.getElementById('turret-info__title').innerHTML = `Name: ${turret.name}`
-    document.getElementById('turret-info__radius').innerHTML = `Radius: ${turret.radius}`
-    document.getElementById('turret-info__damage').innerHTML = `Damage: ${turret.damage}`
-    document.getElementById('turret-info__speed').innerHTML = `Speed: ${turret.speed}`
-    document.getElementById('turret-info__cost').innerHTML = `Cost: ${turret.cost}`
+    let speed = ''
+    switch (turret.name) {
+        case 'pm-one':
+            speed = 'Normal'
+            break
+        case 'pm-two':
+            speed = 'Fast'
+            break
+        case 'pm-three':
+            speed = 'Slow'
+            break
+        case 'eskil':
+            speed = 'Very fast'
+            break
+
+    }
+    document.getElementById('turret-info__damage').innerHTML = `${turret.damage}`
+    document.getElementById('turret-info__speed').innerHTML = `${speed}`
+    document.getElementById('turret-info__cost').innerHTML = `${turret.cost} xp`
 }
 
 function startLevel() {
@@ -152,14 +177,29 @@ function startLevel() {
         case 6:
             nextLvl = 'six'
             break;
+        case 7:
+            nextLvl = 'seven'
+            break;
     }
 
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
     btnPlay.disabled = true;
 }
 
+function playerLoose(){
+  
+    let txt = document.createTextNode('You Lost')
+    let h1 = document.createElement('H1')
+    h1.appendChild(txt)
+    h1.classList.add('big-fat-text')
+    document.body.appendChild(h1);
+    window.cancelAnimationFrame(animationFrame);
+    console.log(animationFrame)
+
+
+}
+
 function canPlaceTower(pos, turret) {
-    console.log(pos, turret)
     return state.map[pos.y][pos.x] === 1 &&
         !(state.turrets.some(t => {
             return t.position.x === pos.x && t.position.y === pos.y
@@ -249,10 +289,14 @@ function getState(oldState) {
 
                 enemy.moveTimer = 0;
             } else {
-                lives--;
-                domLives.innerHTML = lives;
+                lives -= enemy.hpDamage;
+               
                 enemy.isAlive = false;
-
+                if(lives <= 0) {
+                    playerLoose();
+                    lives  = 0
+                }
+                domLives.innerHTML = lives;
             }
         } else {
             enemy.moveTimer += window.performance.now() - state.clock;
@@ -386,7 +430,6 @@ function render() {
     }
     // }
     if (hoveredTurret) {
-        console.log(hoveredTurret)
         context.beginPath();
         context.fillStyle = "#00000044";
         context.arc(hoveredTurret.position.x * ts + ts / 2, hoveredTurret.position.y * ts + ts / 2, hoveredTurret.radius * ts, 0, 2 * Math.PI);
@@ -399,7 +442,7 @@ function render() {
         context.fill();
         // context.fillRect( - 200,  - 200, , 400);
     }
-    window.requestAnimationFrame(render);
+    animationFrame = window.requestAnimationFrame(render);
 }
 
 render();

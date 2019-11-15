@@ -15,7 +15,7 @@ module.exports = {
     mode: process.env.NODE_ENV || 'development',
     devtool: 'inline-source-map',
     entry: [
-        './src/scripts/index.js',
+        './src/scripts/landing-page.js',
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
