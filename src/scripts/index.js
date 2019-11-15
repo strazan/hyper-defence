@@ -144,6 +144,8 @@ function loadStoreInfo(turret) {
 }
 
 function startLevel() {
+    btnPlay.disabled = true;
+    btnPlay.style.opacity = 0.3
     startSound();
 
     state.level++
@@ -175,8 +177,7 @@ function startLevel() {
     //change color of btn?
     domLevel.innerHTML = state.level;
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
-    btnPlay.disabled = true;
-    btnPlay.style.opacity = 0.3
+   
 }
 
 function playerLoose(){
@@ -389,7 +390,7 @@ function getState(oldState) {
     }
 
     state.enemies = state.enemies.filter(e => e.isAlive)
-    if (!state.enemies.length) {
+    if (!state.enemies.length && !state.toSpawn.length) {
         if(state.level === 'seven'){
            win();
         }
