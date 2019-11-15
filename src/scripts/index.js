@@ -58,7 +58,7 @@ backgroundSound.loop = true;
 let isdeathSoundplaying = false;
 
 function startSound() {
-    // backgroundSound.play();
+    backgroundSound.play();
 }
 domCash.innerHTML = cash;
 domLives.innerHTML = lives;
