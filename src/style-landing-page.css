@@ -1,3 +1,9 @@
+@font-face {
+    font-family: 'dotty'; /*a name to be used later*/
+    src: url('/./media/font/DottyShadow.ttf'); /*URL to font*/
+  }
+  html { font-family: 'dotty', sans-serif; }
+  
 
 @keyframes scale-up-center {
     0% {
@@ -116,7 +122,7 @@ body {
     /* align-items: center; */
     font-size: 5vw;
     margin: 0;
-    font-family: dottyshadow;
+    /* font-family: dottyshadow; */
 }
 
 #info-wrapper {
@@ -125,7 +131,7 @@ body {
     grid-column-start: 2;
     grid-column-end: 12;
     grid-row-start: 4;
-    font-family: alien encounters;
+    /* font-family: alien encounters; */
     font-size: 1vw;
     padding-top: 5%;
 }
@@ -149,7 +155,7 @@ body {
     justify-items: center;
     grid-column-start: 2;
     grid-column-end: 4;
-    font-family: alien encounters;
+    /* font-family: alien encounters; */
     margin-top: 10%;
     font-size: 1vw;
 

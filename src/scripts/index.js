@@ -8,21 +8,16 @@ In no order.
     - tween.
     - maybe have travel duration as a property in turret
 
-#3 Fix the levels.js file, make it look nice/ easy to change the variables.
-
-#4 Invent more enemies, maybe change the structure of how different are created
-
-#5 Invent more turrets. 
-
-#6 Make shop
-
-// Kinda done #7 Make turrets placable on map.
-
-#8 Make turrets target first in map not first in array, also switch target if any enemy passes.
-
-#9 Make turrets have radius
-
 #10 rename all to either turrets or towers ffs.
+
+*/
+
+
+/* FIX BEFORE JAM
+
+    * text when every level is complete.
+    * maybe display level.
+    * some sort of win statement.
 
 */
 
@@ -30,7 +25,6 @@ import './../style.css'
 import {
     Turret
 } from './turret'
-import { brotliDecompressSync } from 'zlib'
 
 const _levels = require('./levels')
 const _map = require('./map')
@@ -50,7 +44,7 @@ canvas.width = window.innerHeight - 16;
 canvas.height = window.innerHeight - 16;
 
 let cash = 100; // mpve to state
-let lives = 10
+let lives = 42
 const domCash = document.getElementById('cash')
 const domLives = document.getElementById('lives')
 const btnPlay = document.getElementById('start')
@@ -63,7 +57,7 @@ backgroundSound.loop = true;
 let isdeathSoundplaying = false;
 
 function startSound() {
-    backgroundSound.play();
+    // backgroundSound.play();
 }
 domCash.innerHTML = cash;
 domLives.innerHTML = lives;
@@ -122,7 +116,6 @@ function buyNewTurret(type) {
         } else {
             buyingTurr = null
             turretInfo.style.visibility = 'hidden';
-
         }
     })
 }
@@ -178,12 +171,13 @@ function startLevel() {
             break;
     }
 
+    //change color of btn?
     state.toSpawn = _levels.getLevels()[nextLvl].enemies
     btnPlay.disabled = true;
+    btnPlay.style.opacity = 0.3
 }
 
 function playerLoose(){
-  
     let txt = document.createTextNode('You Lost')
     let h1 = document.createElement('H1')
     h1.appendChild(txt)
@@ -191,8 +185,14 @@ function playerLoose(){
     document.body.appendChild(h1);
     window.cancelAnimationFrame(animationFrame);
     console.log(animationFrame)
+}
 
-
+function win() {
+    let txt = document.createTextNode('You Won')
+    let h1 = document.createElement('H1')
+    h1.appendChild(txt)
+    h1.classList.add('big-fat-text')
+    document.body.appendChild(h1);
 }
 
 function canPlaceTower(pos, turret) {
@@ -205,7 +205,6 @@ function canPlaceTower(pos, turret) {
 function placeNewTower(pos) {
     buyingTurr.position = pos
     state.turrets.push(buyingTurr)
-
     cash -= buyingTurr.cost
     domCash.innerHTML = cash;
 }
@@ -250,6 +249,33 @@ function getState(oldState) {
     const state = {
         ...oldState
     };
+
+    if(cash >= 1000){
+        buyPmOne.style.opacity = 1
+        buyPmTwo.style.opacity = 1
+        buyPmThree.style.opacity = 1
+        buyEskil.style.opacity = 1
+    } else if(cash >= 200){
+        buyPmOne.style.opacity = 1
+        buyPmTwo.style.opacity = 1
+        buyPmThree.style.opacity = 1
+        buyEskil.style.opacity = 0.3
+    } else if(cash >= 150){
+        buyPmOne.style.opacity = 1
+        buyPmTwo.style.opacity = 1
+        buyPmThree.style.opacity = 0.3
+        buyEskil.style.opacity = 0.3
+    } else if(cash >= 100){
+        buyPmOne.style.opacity = 1
+        buyPmTwo.style.opacity = 0.3
+        buyPmThree.style.opacity = 0.3
+        buyEskil.style.opacity = 0.3
+    } else{
+        buyPmOne.style.opacity = 0.3
+        buyPmTwo.style.opacity = 0.3
+        buyPmThree.style.opacity = 0.3
+        buyEskil.style.opacity = 0.3
+    }
 
     state.toSpawn.forEach(e => {
         if (e.spawnTimer > e.spawnFrequency) {
@@ -362,8 +388,11 @@ function getState(oldState) {
 
     state.enemies = state.enemies.filter(e => e.isAlive)
     if (!state.enemies.length) {
-
+        if(state.level === 'seven'){
+           win();
+        }
         btnPlay.disabled = false
+        btnPlay.style.opacity = 1
     }
     state.clock = window.performance.now();
 

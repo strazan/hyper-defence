@@ -127,10 +127,17 @@ let levels = {
                 spawnTimer: -1000,
                 toSpawn: load('fly', 40)
             },
+            
+
+            {
+                spawnFrequency: 1000,
+                spawnTimer: -15000,
+                toSpawn: load('fly', 40)
+            },
             {
                 spawnFrequency: 2500,
                 spawnTimer: 1000,
-                toSpawn: load('hard', 60)
+                toSpawn: load('hard', 40)
             }
         ]
     },
@@ -138,7 +145,7 @@ let levels = {
         enemies: [{
                 spawnFrequency: 1500,
                 spawnTimer: 2400,
-                toSpawn: load('fly', 80)
+                toSpawn: load('fly', 50)
             },
             {
                 spawnFrequency: 5000,

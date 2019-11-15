@@ -69,7 +69,7 @@
              case 'mega-boss':
                  this.cash = 0;
                  this.speed = 1300;
-                 this.health = 17000;
+                 this.health = 13000;
                  this.hpDamage = 100;
                  this.image.src = '../media/images/enemies/student-red.svg'
                  break;
