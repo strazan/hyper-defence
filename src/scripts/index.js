@@ -390,7 +390,8 @@ function getState(oldState) {
     }
 
     state.enemies = state.enemies.filter(e => e.isAlive)
-    if (!state.enemies.length && !state.toSpawn.length) {
+    
+    if (!state.enemies.length) {
         if(state.level === 'seven'){
            win();
         }

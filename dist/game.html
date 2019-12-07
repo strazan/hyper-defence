@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>tower-defence</title>
+  <!-- <link rel="stylesheet" href="style.css" /> -->
+<link href="style.min.css" rel="stylesheet"></head>
+
+<body>
+
+  <div id="canvas-holder">
+    <canvas id="canvas"></canvas>
+  </div>
+
+  <div class="store">
+      <div style="display:flex; flex-direction: row;">
+          <h1 style="font-weight: 200;">Level _</h1>
+          <h1 id="level"></h1>
+        </div>
+    <div style="display:flex; flex-direction: row;">
+      <h1 style="font-weight: 200;">Health _</h1>
+      <h1 id="lives"></h1>
+    </div>
+    <div style="display:flex; flex-direction: row;">
+      <h1 style="font-weight: 200;">XP _</h1>
+      <h1 id="cash"></h1>
+    </div>
+
+    <div class="staff">
+      <button style="opacity: 0.3;" id="turret-pm-one"></button>
+      <button style="opacity: 0.3;" id="turret-pm-two"></button>
+      <button style="opacity: 0.3;" id="turret-pm-three"></button>
+      <button style="opacity: 0.3;" id="turret-eskil"></button>
+
+    </div>
+    <div id="turret-info">
+
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Damage _</h2>
+        <h2 id="turret-info__damage"></h2>
+      </div>
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Speed _</h2>
+        <h2 id="turret-info__speed"></h2>
+      </div>
+      <div style="display: flex;">
+        <h2 style="font-weight: 200;">Cost _</h2>
+        <h2 id="turret-info__cost"></h2>
+      </div>
+    </div>
+    <button id="start"></button>
+
+  </div>
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script> -->
+  <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tween.js/18.3.1/Tween.min.js"></script> -->
+  <script src="//cdnjs.cloudflare.com/ajax/libs/animejs/2.2.0/anime.min.js"></script>
+<script type="text/javascript" src="script.min.js"></script></body>
+
+</html>
